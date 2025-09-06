@@ -1,0 +1,142 @@
+.key {
+  font-size: clamp(0.9rem, 2.467vw + 0.283rem, 2.75rem);
+  background: conic-gradient(from 45deg, var(--top) 25%, var(--right) 0, var(--right) 50%, var(--bottom) 0, var(--bottom) 75%, var(--left) 0);
+  font-family: system-ui, sans-serif;
+  font-weight: bold;
+  width: 3em;
+  height: 3em;
+  position: relative;
+  transform-style: preserve-3d;
+  color: var(--text);
+  --top: var(--color);
+  --right: lch(from var(--color) calc(l - 15) c h);
+  --bottom: lch(from var(--color) calc(l - 25) c h);
+  --left: lch(from var(--color) calc(l - 10) c h);
+  --text: lch(from var(--color) calc(l - 40) c h);
+  --face: lch(from var(--color) calc(l + 5) c h);
+  --calc-x: calc(-1 * (var(--mouse-y) - var(--y) + (var(--height) / 2)) / 12);
+  --calc-y: calc((var(--mouse-x) - var(--x) + (var(--width) / 2)) / 12);
+  --clamped-x: clamp(-90deg, (var(--calc-x, 0) * 1deg) + var(--offset-x), 90deg);
+  --clamped-y: clamp(-90deg, (var(--calc-y, 0) * 1deg) + var(--offset-y), 90deg);
+  translate: calc(var(--calc-y) * 2px * (var(--seed) * 0.1)) calc(var(--calc-x) * -2px * (var(--seed) * 0.1));
+  transform: rotateX(var(--clamped-x)) rotateY(var(--clamped-y)) translateY(calc(1em * var(--seed)));
+}
+
+.key:nth-child(odd) {
+  transform: rotateX(var(--clamped-x)) rotateY(var(--clamped-y)) translateY(calc(-0.2em * var(--seed)));
+}
+
+.key .sides,
+.key .face {
+  transform-style: preserve-3d;
+  position: absolute;
+  inset: 0;
+}
+
+.key::before,
+.key::after,
+.key .sides::before,
+.key .sides::after {
+  content: "";
+  position: absolute;
+  width: 3em;
+  height: 2.1476731595em;
+  bottom: 50%;
+  clip-path: polygon(0.45em 0%, calc(100% - 0.45em) 0%, 100% 100%, 0% 100%);
+  background: var(--bg, var(--top));
+  transform-origin: center bottom;
+  transform: rotate(var(--turn, 0turn)) translateY(-1.5em) rotateX(-102.094757077deg);
+}
+
+.key .sides::after {
+  --turn: 2.25turn;
+  --bg: var(--right);
+}
+
+.key::after {
+  --turn: -0.5turn;
+  --bg: var(--bottom);
+}
+
+.key .sides::before {
+  --turn: 1.75turn;
+  --bg: var(--left);
+}
+
+.key .face {
+  transform: translateZ(2.1em);
+  margin: auto;
+  width: 2.1em;
+  height: 2.1em;
+  padding: 0.2em 0.35em;
+  background: conic-gradient(var(--top) 25%, var(--right) 0, var(--right) 50%, var(--bottom) 0, var(--bottom) 75%, var(--left) 0);
+  scale: 1.0175;
+}
+
+.key .face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 0.5em;
+  background: var(--face);
+}
+
+.key:nth-child(1) {
+  --offset-x: calc(15deg * var(--seed));
+  --offset-y: calc(-1deg * var(--seed));
+}
+
+.key:nth-child(2) {
+  --offset-x: calc(4deg * var(--seed));
+  --offset-y: calc(-5deg * var(--seed));
+}
+
+.key:nth-child(3) {
+  --offset-x: calc(-8deg * var(--seed));
+  --offset-y: calc(-10deg * var(--seed));
+}
+
+.key:nth-child(4) {
+  --offset-x: calc(-3deg * var(--seed));
+  --offset-y: calc(6deg * var(--seed));
+
+}
+
+#scene {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(5rem, 2.8vw + 0.2rem, 3rem);
+  justify-content: center;
+  height: 20%;
+  width: 100%;
+  perspective: 1000px;
+  align-content: center;
+}
+
+body,
+html {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #00040e;
+}
+
+h1 {
+  display: flex;
+  flex-wrap: wrap;
+  height: 30%;
+  justify-content: center;
+  align-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #ffffff;
+  padding: 0.2em 0.35em;
+
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
