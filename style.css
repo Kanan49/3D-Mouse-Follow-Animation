@@ -120,6 +120,9 @@ html {
   height: 100%;
   overflow: hidden;
   background: #00040e;
+  cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b239d7aeb290a31ac5_cursor-default%402x.svg")
+      2 0,
+    auto;
 }
 
 h1 {
